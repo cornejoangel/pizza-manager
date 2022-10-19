@@ -19,6 +19,8 @@ test('We are able to check the ingredient list of a pizza', () => {
 
 test('We are able to add ingredients to an existing pizza', () => {
   expect(pm.addPizzaTopping('supreme', 'olive')).toBe(true);
+  expect(pm.getPizza('supreme').toppings).toContain("pepperoni");
+  expect(pm.getPizza('supreme').toppings).toContain("sausage");
   expect(pm.getPizza('supreme').toppings).toContain('olive');
 });
 
