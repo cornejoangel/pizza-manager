@@ -8,7 +8,12 @@ const ToppingMenu = () => {
     return true;
   }
 
-  return { getMenu, addTopping };
+  const removeTopping = (topping) => {
+    menu = menu.filter((t) => t !== topping);
+    return true;
+  }
+
+  return { getMenu, addTopping, removeTopping };
 }
 
 export default ToppingMenu;
