@@ -1,5 +1,5 @@
 const PizzaMenu = () => {
-  const menu = [];
+  let menu = [];
 
   const getMenu = () => menu;
 
@@ -29,7 +29,12 @@ const PizzaMenu = () => {
     return false;
   };
 
-  return { getMenu, addPizza, getPizza, addPizzaTopping };
+  const removePizza = (pizza) => {
+    menu = menu.filter((p) => p.name !== pizza);
+    return true;
+  }
+
+  return { getMenu, addPizza, getPizza, addPizzaTopping, removePizza };
 };
 
 export default PizzaMenu;

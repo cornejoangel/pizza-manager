@@ -28,3 +28,10 @@ test('We are not able to add a pizza without toppings', () => {
   expect(pm.addPizza("veggie")).toBe(false);
   expect(pm.addPizza("cheese", [])).toBe(false);
 })
+
+test('We are able to remove a pizza from the menu', () => {
+  expect(pm.addPizza("veggie", ["onion"])).toBe(true);
+  expect(pm.getPizza("veggie")).toBeTruthy();
+  expect(pm.removePizza("veggie")).toBe(true);
+  expect(pm.getPizza("veggie")).toBeFalsy();
+})
