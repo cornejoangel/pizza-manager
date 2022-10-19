@@ -5,6 +5,7 @@ const App = () => {
   const [toppings] = useState(ToppingMenu());
   const [toppingsMenu, setToppingsMenu] = useState(toppings.getMenu());
   const [topping, setTopping] = useState('');
+  const [updatingTopping, setUpdatingTopping] = useState(false);
 
   const addTopping = (e, newTopping) => {
     e.preventDefault();
@@ -22,6 +23,22 @@ const App = () => {
     setToppingsMenu(toppings.getMenu());
   };
 
+  const selectTopping = (oldTopping) => {
+    setUpdatingTopping(oldTopping);
+  };
+
+  const updateTopping = (e, newTopping) => {
+    e.preventDefault();
+    toppings.updateTopping(updatingTopping, newTopping);
+    setToppingsMenu(toppings.getMenu());
+    setTopping('');
+    setUpdatingTopping(false);
+  }
+
+  const cancelUpdate = () => {
+    setUpdatingTopping(false);
+  }
+
   return (
     <main>
       <div>
@@ -31,14 +48,29 @@ const App = () => {
             <li key={t}>
               {t}
               <button type="button" onClick={() => removeTopping(t)}>Delete</button>
+              {updatingTopping && t === updatingTopping && (
+                <button type="button" onClick={() => cancelUpdate()}>Cancel Update</button>
+              )}
+              {!updatingTopping && (
+                <button type="button" onClick={() => selectTopping(t)}>Update</button>
+              )}
             </li>
           ))}
         </ul>
-        <form onSubmit={(e) => addTopping(e, topping)}>
-          <label htmlFor="topping">Add New Topping</label>
-          <input type="text" name="topping" value={topping} onChange={toppingChange} />
-          <button type="submit">Add</button>
-        </form>
+        {updatingTopping === false && (
+          <form onSubmit={(e) => addTopping(e, topping)}>
+            <label htmlFor="topping">Add New Topping</label>
+            <input type="text" name="topping" value={topping} onChange={toppingChange} />
+            <button type="submit">Add</button>
+          </form>
+        )}
+        {updatingTopping && (
+          <form onSubmit={(e) => updateTopping(e, topping)}>
+            <label htmlFor="topping">Update Topping</label>
+            <input type="text" name="topping" value={topping} onChange={toppingChange} />
+            <button type="submit">Update</button>
+          </form>
+        )}
       </div>
     </main>
   );
