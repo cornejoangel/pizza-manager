@@ -5,8 +5,11 @@ const PizzaMenu = () => {
 
   const addPizza = (name, toppings) => {
     const pizza = { name, toppings };
-    menu.push(pizza);
-    return true;
+    if (toppings && toppings.length > 0) {
+      menu.push(pizza);
+      return true;
+    }
+    return false;
   };
 
   const getPizza = (pizzaName) => {
