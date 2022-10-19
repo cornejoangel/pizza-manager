@@ -8,7 +8,15 @@ const PizzaMenu = () => {
     return true;
   }
 
-  return { getMenu, addPizza };
+  const getPizza = (pizzaName) => {
+    const existingPizza = menu.find((p) => p.name === pizzaName)
+    if (existingPizza) {
+      return existingPizza;
+    }
+    return false;
+  }
+
+  return { getMenu, addPizza, getPizza };
 };
 
 export default PizzaMenu;

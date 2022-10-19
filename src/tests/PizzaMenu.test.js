@@ -7,6 +7,10 @@ test('A list of pizzas can be retrieved', () => {
 });
 
 test('We are able to add a new pizza to the menu', () => {
-  expect(pm.addPizza("supreme")).toBe(true);
-  expect(pm.getMenu()).toContain('supreme');
+  expect(pm.addPizza({ "name": "supreme", "ingredients": [] })).toBe(true);
+  expect(pm.getPizza("supreme")).toMatchObject({ "name": "supreme"});
 });
+
+test('We are able to check the ingredient list of a pizza', () => {
+  expect(pm.getPizza('supreme').ingredients).toBeDefined();
+})
