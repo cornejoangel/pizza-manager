@@ -16,7 +16,16 @@ const ToppingMenu = () => {
     return true;
   }
 
-  return { getMenu, addTopping, removeTopping };
+  const updateTopping = (oldTopping, newTopping) => {
+    if (!menu.includes(oldTopping.toLowerCase())) {
+      return false;
+    }
+    const index = menu.findIndex((t) => t === oldTopping.toLowerCase());
+    menu[index] = newTopping.toLowerCase();
+    return true;
+  };
+
+  return { getMenu, addTopping, removeTopping, updateTopping };
 }
 
 export default ToppingMenu;

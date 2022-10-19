@@ -25,3 +25,10 @@ test('We are not able to add duplicate toppings to the menu', () => {
   expect(tm.addTopping('Mushroom')).toBe(false);
   expect(tm.addTopping('MUSHROOM')).toBe(false);
 });
+
+test('We are able to update toppings already on the menu', () => {
+  expect(tm.addTopping('pep')).toBe(true);
+  expect(tm.updateTopping('pep', 'pepperoni')).toBe(true);
+  expect(tm.getMenu()).not.toContain('pep');
+  expect(tm.getMenu()).toContain('pepperoni');
+});
