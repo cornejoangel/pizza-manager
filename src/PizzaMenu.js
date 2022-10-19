@@ -34,7 +34,23 @@ const PizzaMenu = () => {
     return true;
   }
 
-  return { getMenu, addPizza, getPizza, addPizzaTopping, removePizza };
+  const removePizzaTopping = (pizza, topping) => {
+    const index = menu.findIndex((p) => p.name === pizza);
+    if (index > -1 && menu[index].toppings.includes(topping)) {
+      menu[index].toppings = menu[index].toppings.filter((t) => t !== topping);
+      return true;
+    }
+    return false;
+  }
+
+  return { 
+    getMenu, 
+    addPizza, 
+    getPizza, 
+    addPizzaTopping, 
+    removePizza, 
+    removePizzaTopping 
+  };
 };
 
 export default PizzaMenu;
