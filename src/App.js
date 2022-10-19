@@ -17,13 +17,21 @@ const App = () => {
     setTopping(e.target.value);
   };
 
+  const removeTopping = (oldTopping) => {
+    toppings.removeTopping(oldTopping);
+    setToppingsMenu(toppings.getMenu());
+  };
+
   return (
     <main>
       <div>
         <h2>Toppings</h2>
         <ul>
           {toppingsMenu.map((t) => (
-            <li key={t}>{t}</li>
+            <li key={t}>
+              {t}
+              <button type="button" onClick={() => removeTopping(t)}>Delete</button>
+            </li>
           ))}
         </ul>
         <form onSubmit={(e) => addTopping(e, topping)}>
