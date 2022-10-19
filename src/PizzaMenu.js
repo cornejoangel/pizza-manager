@@ -3,8 +3,9 @@ const PizzaMenu = () => {
 
   const getMenu = () => menu;
 
-  const addPizza = (newPizza) => {
-    menu.push(newPizza);
+  const addPizza = (name, toppings) => {
+    const pizza = { name, toppings };
+    menu.push(pizza);
     return true;
   };
 
@@ -18,12 +19,12 @@ const PizzaMenu = () => {
 
   const addPizzaTopping = (pizza, topping) => {
     const index = menu.findIndex((p) => p.name === pizza);
-    if (index > -1 && !menu[index].ingredients.includes(topping)) {
-      menu[index].ingredients.push(topping);
+    if (index > -1 && !menu[index].toppings.includes(topping)) {
+      menu[index].toppings.push(topping);
       return true;
     }
     return false;
-  }
+  };
 
   return { getMenu, addPizza, getPizza, addPizzaTopping };
 };
