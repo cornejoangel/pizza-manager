@@ -21,6 +21,7 @@ const App = () => {
   const removeTopping = (oldTopping) => {
     toppings.removeTopping(oldTopping);
     setToppingsMenu(toppings.getMenu());
+    setUpdatingTopping(false);
   };
 
   const selectTopping = (oldTopping) => {
