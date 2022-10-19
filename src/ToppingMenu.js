@@ -4,7 +4,10 @@ const ToppingMenu = () => {
   const getMenu = () => menu;
 
   const addTopping = (newTopping) => {
-    menu.push(newTopping);
+    if (menu.includes(newTopping.toLowerCase())) {
+      return false;
+    }
+    menu.push(newTopping.toLowerCase());
     return true;
   }
 
