@@ -32,3 +32,10 @@ test('We are able to update toppings already on the menu', () => {
   expect(tm.getMenu()).not.toContain('pep');
   expect(tm.getMenu()).toContain('pepperoni');
 });
+
+test('We are not able to update a topping to be an existing topping', () => {
+  expect(tm.getMenu()).toContain('mushroom');
+  expect(tm.addTopping('mush')).toBe(true);
+  expect(tm.updateTopping('mush', 'mushroom')).toBe(false);
+  expect(tm.getMenu()).toContain('mush');
+});

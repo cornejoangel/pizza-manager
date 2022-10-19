@@ -17,7 +17,7 @@ const ToppingMenu = () => {
   }
 
   const updateTopping = (oldTopping, newTopping) => {
-    if (!menu.includes(oldTopping.toLowerCase())) {
+    if (!menu.includes(oldTopping.toLowerCase()) || menu.includes(newTopping.toLowerCase())) {
       return false;
     }
     const index = menu.findIndex((t) => t === oldTopping.toLowerCase());
