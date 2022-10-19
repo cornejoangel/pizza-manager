@@ -3,7 +3,12 @@ const ToppingMenu = () => {
 
   const getMenu = () => menu;
 
-  return { getMenu };
+  const addTopping = (newTopping) => {
+    menu.push(newTopping);
+    return true;
+  }
+
+  return { getMenu, addTopping };
 }
 
 export default ToppingMenu;
