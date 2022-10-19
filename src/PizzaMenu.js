@@ -3,7 +3,12 @@ const PizzaMenu = () => {
 
   const getMenu = () => menu;
 
-  return { getMenu };
+  const addPizza = (newPizza) => {
+    menu.push(newPizza);
+    return true;
+  }
+
+  return { getMenu, addPizza };
 };
 
 export default PizzaMenu;
