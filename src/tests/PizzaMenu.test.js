@@ -35,3 +35,19 @@ test('We are able to remove a pizza from the menu', () => {
   expect(pm.removePizza("veggie")).toBe(true);
   expect(pm.getPizza("veggie")).toBeFalsy();
 })
+
+test('We are able to remove toppings from a pizza', () => {
+  expect(true).toBe(false);
+})
+
+test('We are able to update the name of a pizza', () => {
+  expect(true).toBe(false);
+})
+
+test('We are not able to create a pizza with a duplicate name', () => {
+  expect(true).toBe(false);
+})
+
+test('We are not able to create a pizza with a duplicate ingredient list', () => {
+  expect(true).toBe(false);
+})
