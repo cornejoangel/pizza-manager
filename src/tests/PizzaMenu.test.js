@@ -44,9 +44,13 @@ test('We are able to remove toppings from a pizza', () => {
   expect(pm.getPizza('supreme').toppings).not.toContain('olive');
 })
 
-// test('We are able to update the name of a pizza', () => {
-//   expect(true).toBe(false);
-// })
+test('We are able to update the name of a pizza', () => {
+  expect(pm.getPizza('supreme').name).toBeDefined();
+  expect(pm.getPizza('mega').name).not.toBeDefined();
+  expect(pm.updateName('supreme', 'mega')).toBe(true);
+  expect(pm.getPizza('supreme').name).not.toBeDefined();
+  expect(pm.getPizza('mega').name).toBeDefined();
+})
 
 // test('We are not able to create a pizza with a duplicate name', () => {
 //   expect(true).toBe(false);

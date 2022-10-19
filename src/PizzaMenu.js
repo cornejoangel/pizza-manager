@@ -43,13 +43,24 @@ const PizzaMenu = () => {
     return false;
   }
 
+  const updateName = (pizza, newName) => {
+    const index = menu.findIndex((p) => p.name === pizza);
+    // also check that the new name is not already used
+    if (index > -1 && menu.findIndex((p) => p === newName) === -1) {
+      menu[index].name = newName;
+      return true;
+    }
+    return false;
+  }
+
   return { 
     getMenu, 
     addPizza, 
     getPizza, 
     addPizzaTopping, 
     removePizza, 
-    removePizzaTopping 
+    removePizzaTopping,
+    updateName
   };
 };
 
