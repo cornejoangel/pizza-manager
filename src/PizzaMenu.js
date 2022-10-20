@@ -5,7 +5,8 @@ const PizzaMenu = () => {
 
   const addPizza = (name, toppings) => {
     const pizza = { name, toppings };
-    if (toppings && toppings.length > 0) {
+    const nameUsed = menu.find((p) => p.name === name)
+    if (toppings && toppings.length > 0 && !nameUsed) {
       menu.push(pizza);
       return true;
     }
@@ -46,7 +47,7 @@ const PizzaMenu = () => {
   const updateName = (pizza, newName) => {
     const index = menu.findIndex((p) => p.name === pizza);
     // also check that the new name is not already used
-    if (index > -1 && menu.findIndex((p) => p === newName) === -1) {
+    if (index > -1 && menu.findIndex((p) => p.name === newName) === -1) {
       menu[index].name = newName;
       return true;
     }

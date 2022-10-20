@@ -52,9 +52,16 @@ test('We are able to update the name of a pizza', () => {
   expect(pm.getPizza('mega').name).toBeDefined();
 })
 
-// test('We are not able to create a pizza with a duplicate name', () => {
-//   expect(true).toBe(false);
-// })
+test('We are not able to create a pizza with a duplicate name', () => {
+  expect(pm.addPizza("veggie", ["onion"])).toBe(true);
+  expect(pm.addPizza("veggie", ["olive"])).toBe(false);
+})
+
+test('We are not able to change a pizza name to one that exists', () => {
+  expect(pm.getPizza('mega').name).toBeDefined();
+  expect(pm.updateName('mega', 'supreme')).toBe(true);
+  expect(pm.updateName('veggie', 'supreme')).toBe(false);
+})
 
 // test('We are not able to create a pizza with a duplicate ingredient list', () => {
 //   expect(true).toBe(false);
