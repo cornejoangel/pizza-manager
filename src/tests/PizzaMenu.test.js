@@ -63,6 +63,7 @@ test('We are not able to change a pizza name to one that exists', () => {
   expect(pm.updateName('veggie', 'supreme')).toBe(false);
 })
 
-// test('We are not able to create a pizza with a duplicate ingredient list', () => {
-//   expect(true).toBe(false);
-// })
+test('We are not able to create a pizza with a duplicate topping list', () => {
+  expect(pm.getPizza('veggie').toppings).toEqual(["onion"]);
+  expect(pm.addPizza("vegetarian", ["onion"])).toBe(false);
+})
