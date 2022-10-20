@@ -1,4 +1,5 @@
 import ToppingMenu from "./ToppingMenu";
+import PizzaMenu from "./PizzaMenu";
 import { useState } from "react";
 
 const App = () => {
@@ -6,6 +7,8 @@ const App = () => {
   const [toppingsMenu, setToppingsMenu] = useState(toppings.getMenu());
   const [topping, setTopping] = useState('');
   const [updatingTopping, setUpdatingTopping] = useState(false);
+  const [pizzas] = useState(PizzaMenu());
+  const [pizzasMenu, setPizzasMenu] = useState(pizzas.getMenu());
 
   const addTopping = (e, newTopping) => {
     e.preventDefault();
@@ -42,7 +45,7 @@ const App = () => {
 
   return (
     <main>
-      <div>
+      <div className="toppings">
         <h2>Toppings</h2>
         <ul>
           {toppingsMenu.map((t) => (
@@ -72,6 +75,16 @@ const App = () => {
             <button type="submit">Update</button>
           </form>
         )}
+      </div>
+      <div className="pizzas">
+        <h2>Pizzas</h2>
+        <ul>
+          {pizzasMenu.map((p) => (
+            <li key={p.name}>
+              {p.name}
+            </li>
+          ))}
+        </ul>
       </div>
     </main>
   );
