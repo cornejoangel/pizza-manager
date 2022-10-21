@@ -1,6 +1,7 @@
 import ToppingMenu from "./ToppingMenu";
 import PizzaMenu from "./PizzaMenu";
 import { useState } from "react";
+import uniqid from 'uniqid';
 
 const App = () => {
   const [toppings] = useState(ToppingMenu());
@@ -71,7 +72,7 @@ const App = () => {
         <h2>Toppings</h2>
         <ul>
           {toppingsMenu.map((t) => (
-            <li key={t}>
+            <li key={uniqid()}>
               {t}
               <button type="button" onClick={() => removeTopping(t)}>Delete</button>
               {updatingTopping && t === updatingTopping && (
@@ -102,11 +103,11 @@ const App = () => {
         <h2>Pizzas</h2>
         <ul>
           {pizzasMenu.map((p) => (
-            <li key={p.name}>
+            <li key={uniqid()}>
               {p.name}
               <ul>
                 {p.toppings.map((t) => (
-                  <li key={t}>{t}</li>
+                  <li key={uniqid()}>{t}</li>
                 ))}
               </ul>
             </li>
@@ -117,7 +118,7 @@ const App = () => {
           <input type="text" name="pizza" value={pizza} onChange={changePizza} />
           <label htmlFor="topping">Choose toppings</label>
           {toppingsMenu.map((t) => (
-            <label>
+            <label key={uniqid()}>
               <input type="checkbox" checked={pizzaToppings.includes(t)} 
               onChange={(e) => checkTopping(e, t)}/>
               {t}
