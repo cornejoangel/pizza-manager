@@ -16,7 +16,7 @@ const PizzaMenu = () => {
       if (menu[i].toppings.every((t) => toppings.includes(t)) &&
         toppings.every((t) => menu[i].toppings.includes(t))
       ) {
-        used = true;
+        used = menu[i].name;
       }
     }
     return used;
@@ -88,16 +88,31 @@ const PizzaMenu = () => {
       A pizza with the new name does not already exist
       We are provided a new topping list
       The new topping list is not identical to one already in use
+
+    You can update just the name or the toppings
+
+    This works by first attempting to update the name
+      If the name is already in use by another pizza updatePizza returns
+    Then attempting to update the toppings 
+      If the toppings were identical to the toppings of a different pizza 
+        then we revert the name change and also do not change the toppings
   */
   const updatePizza = (oldName, newName, newToppings) => {
     const index = menu.findIndex((p) => p.name === oldName);
-    const nameUsed = menu.find((p) => p.name === newName.toLowerCase());
-    if (index > -1 && !nameUsed && newToppings && newToppings.length > 0 
-      && !toppingsUsed(newToppings)) {
-      menu[index].name = newName.toLowerCase();
-      menu[index].toppings = newToppings;
-      return true;
+    const nameUsed = menu.findIndex((p) => p.name === newName.toLowerCase());
+    if (menu[nameUsed] === menu[index] || nameUsed === -1) {
+      updateName(oldName, newName);
+    } else {
+      // attempting to update to a name that already exists - return
+      return false;
     }
+
+    if (newToppings && newToppings.length > 0 && (!toppingsUsed(newToppings) || toppingsUsed(newToppings) === menu[index].name)) {
+      updateToppings(oldName, newToppings);
+      return true;
+    } 
+    // attempted to update to a topping list that already exists - revert name change
+    updateName(newName, oldName);
     return false;
   }
 
