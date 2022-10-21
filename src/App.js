@@ -9,6 +9,8 @@ const App = () => {
   const [updatingTopping, setUpdatingTopping] = useState(false);
   const [pizzas] = useState(PizzaMenu());
   const [pizzasMenu, setPizzasMenu] = useState(pizzas.getMenu());
+  const [pizza, setPizza] = useState('');
+  const [pizzaToppings, setPizzaToppings] = useState([]);
 
   const addTopping = (e, newTopping) => {
     e.preventDefault();
@@ -41,6 +43,26 @@ const App = () => {
 
   const cancelUpdate = () => {
     setUpdatingTopping(false);
+  }
+
+  const changePizza = (e) => {
+    setPizza(e.target.value);
+  }
+
+  const addPizza = (e, newPizza) => {
+    e.preventDefault();
+    pizzas.addPizza(newPizza, pizzaToppings);
+    setPizzasMenu(pizzas.getMenu());
+    setPizza('');
+    setPizzaToppings([]);
+  }
+
+  const checkTopping = (e, checkedTopping) => {
+    if (pizzaToppings.includes(checkedTopping)) {
+      setPizzaToppings(pizzaToppings.filter((t) => t !== checkedTopping));
+      return;
+    }
+    setPizzaToppings(pizzaToppings.concat(checkedTopping));
   }
 
   return (
@@ -82,9 +104,27 @@ const App = () => {
           {pizzasMenu.map((p) => (
             <li key={p.name}>
               {p.name}
+              <ul>
+                {p.toppings.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>
+        <form onSubmit={(e) => addPizza(e, pizza)}>
+          <label htmlFor="pizza">Add New Pizza</label>
+          <input type="text" name="pizza" value={pizza} onChange={changePizza} />
+          <label htmlFor="topping">Choose toppings</label>
+          {toppingsMenu.map((t) => (
+            <label>
+              <input type="checkbox" checked={pizzaToppings.includes(t)} 
+              onChange={(e) => checkTopping(e, t)}/>
+              {t}
+            </label>
+          ))}
+          <button type="submit">Add</button>
+        </form>
       </div>
     </main>
   );
