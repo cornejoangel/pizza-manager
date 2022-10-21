@@ -126,14 +126,14 @@ const App = () => {
         </ul>
         {updatingTopping === false && (
           <form onSubmit={(e) => addTopping(e, topping)}>
-            <label htmlFor="topping">Add New Topping</label>
+            <label htmlFor="topping">Add New Topping (name required)</label>
             <input type="text" name="topping" value={topping} onChange={toppingChange} />
             <button type="submit">Add</button>
           </form>
         )}
         {updatingTopping && (
           <form onSubmit={(e) => updateTopping(e, topping)}>
-            <label htmlFor="topping">Update Topping</label>
+            <label htmlFor="topping">Update Topping (name required)</label>
             <input type="text" name="topping" value={topping} onChange={toppingChange} />
             <button type="submit">Update</button>
           </form>
@@ -162,9 +162,9 @@ const App = () => {
         </ul>
         {!updatingPizza && (
           <form onSubmit={(e) => addPizza(e, pizza)}>
-            <label htmlFor="pizza">Add New Pizza</label>
+            <label htmlFor="pizza">Add New Pizza (name required)</label>
             <input type="text" name="pizza" value={pizza} onChange={changePizza} />
-            <label htmlFor="topping">Choose toppings</label>
+            <label htmlFor="topping">Choose toppings (minimum: 1)</label>
             {toppingsMenu.map((t) => (
               <label key={uniqid()}>
                 <input type="checkbox" checked={pizzaToppings.includes(t)} 
@@ -177,9 +177,9 @@ const App = () => {
         )}
         {updatingPizza && (
           <form onSubmit={(e) => updatePizza(e, pizza)}>
-            <label htmlFor="pizza">Update Pizza</label>
+            <label htmlFor="pizza">Update Pizza (name required)</label>
             <input type="text" name="pizza" value={pizza} onChange={changePizza} />
-            <label htmlFor="topping">Choose toppings</label>
+            <label htmlFor="topping">Update toppings (minimum: 1)</label>
             {toppingsMenu.map((t) => (
               <label key={uniqid()}>
                 <input type="checkbox" checked={pizzaToppings.includes(t)} 
