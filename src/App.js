@@ -66,6 +66,11 @@ const App = () => {
     setPizzaToppings(pizzaToppings.concat(checkedTopping));
   }
 
+  const removePizza = (oldPizza) => {
+    pizzas.removePizza(oldPizza);
+    setPizzasMenu(pizzas.getMenu());
+  }
+
   return (
     <main>
       <div className="toppings">
@@ -105,6 +110,7 @@ const App = () => {
           {pizzasMenu.map((p) => (
             <li key={uniqid()}>
               {p.name}
+              <button type="button" onClick={() => removePizza(p.name)}>Delete</button>
               <ul>
                 {p.toppings.map((t) => (
                   <li key={uniqid()}>{t}</li>
