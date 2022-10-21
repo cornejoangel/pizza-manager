@@ -82,8 +82,7 @@ const App = () => {
 
   const updatePizza = (e, newPizza) => {
     e.preventDefault();
-    pizzas.updateName(updatingPizza, newPizza);
-    pizzas.updateToppings(newPizza, pizzaToppings);
+    pizzas.updatePizza(updatingPizza, newPizza, pizzaToppings);
     setPizzasMenu(pizzas.getMenu());
     setPizza('');
     setUpdatingPizza(false);
