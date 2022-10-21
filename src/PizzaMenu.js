@@ -73,6 +73,15 @@ const PizzaMenu = () => {
     return false;
   }
 
+  const updateToppings = (pizza, newToppings) => {
+    const index = menu.findIndex((p) => p.name === pizza);
+    if (index > -1) {
+      menu[index].toppings = newToppings;
+      return true;
+    }
+    return false;
+  }
+
   return { 
     getMenu, 
     addPizza, 
@@ -80,7 +89,8 @@ const PizzaMenu = () => {
     addPizzaTopping, 
     removePizza, 
     removePizzaTopping,
-    updateName
+    updateName,
+    updateToppings
   };
 };
 

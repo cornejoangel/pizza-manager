@@ -67,3 +67,10 @@ test('We are not able to create a pizza with a duplicate topping list', () => {
   expect(pm.getPizza('veggie').toppings).toEqual(["onion"]);
   expect(pm.addPizza("vegetarian", ["onion"])).toBe(false);
 })
+
+test('We can update a pizza topping list with one function', () => {
+  expect(pm.addPizza('veg', ["spinach"])).toBe(true);
+  expect(pm.getMenu()).toContainEqual({"name": 'veg', "toppings": ["spinach"]});
+  expect(pm.updateToppings("veg", ["onions", "artichoke", "bell peppers"])).toBe(true);
+  expect(pm.getMenu()).toContainEqual({"name": 'veg', "toppings": ["onions", "artichoke", "bell peppers"]});
+})
