@@ -41,7 +41,11 @@ const App = () => {
 
   const updateTopping = (e, newTopping) => {
     e.preventDefault();
-    toppings.updateTopping(updatingTopping, newTopping);
+    let result = true;
+    result = toppings.updateTopping(updatingTopping, newTopping);
+    if (!result) {
+      alert('Failed to update topping name - ensure new name is unique');
+    }
     setToppingsMenu(toppings.getMenu());
     setTopping('');
     setUpdatingTopping(false);
@@ -91,7 +95,11 @@ const App = () => {
 
   const updatePizza = (e, newPizza) => {
     e.preventDefault();
-    pizzas.updatePizza(updatingPizza, newPizza, pizzaToppings);
+    let result = true;
+    result = pizzas.updatePizza(updatingPizza, newPizza, pizzaToppings);
+    if (!result) {
+      alert('Failed to update pizza - ensure new name and toppings are unique');
+    }
     setPizzasMenu(pizzas.getMenu());
     setPizza('');
     setUpdatingPizza(false);
