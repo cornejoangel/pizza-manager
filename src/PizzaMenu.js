@@ -23,8 +23,8 @@ const PizzaMenu = () => {
   };
 
   const addPizza = (name, toppings) => {
-    const pizza = { name, toppings };
-    const nameUsed = menu.find((p) => p.name === name)
+    const pizza = { name: name.toLowerCase(), toppings };
+    const nameUsed = menu.find((p) => p.name === name.toLowerCase())
     if (toppings && toppings.length > 0 && !nameUsed && !toppingsUsed(toppings)) {
       menu.push(pizza);
       return true;
@@ -66,8 +66,8 @@ const PizzaMenu = () => {
   const updateName = (pizza, newName) => {
     const index = menu.findIndex((p) => p.name === pizza);
     // also check that the new name is not already used
-    if (index > -1 && menu.findIndex((p) => p.name === newName) === -1) {
-      menu[index].name = newName;
+    if (index > -1 && menu.findIndex((p) => p.name === newName.toLowerCase()) === -1) {
+      menu[index].name = newName.toLowerCase();
       return true;
     }
     return false;
@@ -91,10 +91,10 @@ const PizzaMenu = () => {
   */
   const updatePizza = (oldName, newName, newToppings) => {
     const index = menu.findIndex((p) => p.name === oldName);
-    const nameUsed = menu.find((p) => p.name === newName);
+    const nameUsed = menu.find((p) => p.name === newName.toLowerCase());
     if (index > -1 && !nameUsed && newToppings && newToppings.length > 0 
       && !toppingsUsed(newToppings)) {
-      menu[index].name = newName;
+      menu[index].name = newName.toLowerCase();
       menu[index].toppings = newToppings;
       return true;
     }

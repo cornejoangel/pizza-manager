@@ -84,3 +84,13 @@ test('We can update a pizza name and toppings with one function', () => {
   expect(pm.updatePizza('meaty', 'very meaty', ['ham', 'sausage', 'pepperoni'])).toBe(true);
   expect(pm.getMenu()).toContainEqual({"name": 'very meaty', "toppings": ["ham", "sausage", "pepperoni"]});
 })
+
+test('Pizza names are case insensitive', () => {
+  expect(pm.getPizza("supreme")).toMatchObject({ "name": "supreme"});
+  expect(pm.getPizza("Supreme")).toBe(false);
+  expect(pm.getPizza("SUPREME")).toBe(false);
+  expect(pm.addPizza("Supreme", ["something"])).toBe(false);
+  expect(pm.getPizza("Supreme")).toBe(false);
+  expect(pm.addPizza("SUPREME", ["something else"])).toBe(false);
+  expect(pm.getPizza("SUPREME")).toBe(false);
+})
