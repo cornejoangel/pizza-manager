@@ -70,6 +70,7 @@ const App = () => {
   const removePizza = (oldPizza) => {
     pizzas.removePizza(oldPizza);
     setPizzasMenu(pizzas.getMenu());
+    setUpdatingPizza(false);
   }
 
   const cancelPizzaUpdate = () => {
