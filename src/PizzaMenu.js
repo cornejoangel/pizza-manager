@@ -82,6 +82,25 @@ const PizzaMenu = () => {
     return false;
   }
 
+  /*
+    Conditions required for successful update:
+      A pizza with the old name already exists
+      A pizza with the new name does not already exist
+      We are provided a new topping list
+      The new topping list is not identical to one already in use
+  */
+  const updatePizza = (oldName, newName, newToppings) => {
+    const index = menu.findIndex((p) => p.name === oldName);
+    const nameUsed = menu.find((p) => p.name === newName);
+    if (index > -1 && !nameUsed && newToppings && newToppings.length > 0 
+      && !toppingsUsed(newToppings)) {
+      menu[index].name = newName;
+      menu[index].toppings = newToppings;
+      return true;
+    }
+    return false;
+  }
+
   return { 
     getMenu, 
     addPizza, 
@@ -90,7 +109,8 @@ const PizzaMenu = () => {
     removePizza, 
     removePizzaTopping,
     updateName,
-    updateToppings
+    updateToppings,
+    updatePizza
   };
 };
 
