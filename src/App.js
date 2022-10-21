@@ -16,7 +16,11 @@ const App = () => {
 
   const addTopping = (e, newTopping) => {
     e.preventDefault();
-    toppings.addTopping(newTopping);
+    let result = true;
+    result = toppings.addTopping(newTopping);
+    if (!result) {
+      alert('Failed to add topping - ensure topping name is unique');
+    }
     setToppingsMenu(toppings.getMenu());
     setTopping('');
   };
@@ -53,7 +57,11 @@ const App = () => {
 
   const addPizza = (e, newPizza) => {
     e.preventDefault();
-    pizzas.addPizza(newPizza, pizzaToppings);
+    let result = true;
+    result = pizzas.addPizza(newPizza, pizzaToppings);
+    if (!result) {
+      alert('Failed to add pizza - check that name and toppings are both unique');
+    }
     setPizzasMenu(pizzas.getMenu());
     setPizza('');
     setPizzaToppings([]);
