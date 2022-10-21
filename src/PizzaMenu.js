@@ -98,6 +98,9 @@ const PizzaMenu = () => {
         then we revert the name change and also do not change the toppings
   */
   const updatePizza = (oldName, newName, newToppings) => {
+    if (newName.length === 0 || newName === "") {
+      return false;
+    }
     const index = menu.findIndex((p) => p.name === oldName);
     const nameUsed = menu.findIndex((p) => p.name === newName.toLowerCase());
     if (menu[nameUsed] === menu[index] || nameUsed === -1) {

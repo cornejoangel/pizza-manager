@@ -107,3 +107,8 @@ test('Pizza names are case insensitive', () => {
   expect(pm.addPizza("SUPREME", ["something else"])).toBe(false);
   expect(pm.getPizza("SUPREME")).toBe(false);
 })
+
+test('Cannot update to an empty pizza name', () => {
+  expect(pm.addPizza("meat", ["sausage"])).toBe(true);
+  expect(pm.updatePizza("meat", "", ["sausage", "ham"])).toBe(false);
+})
