@@ -114,6 +114,9 @@ const App = () => {
           {toppingsMenu.map((t) => (
             <li key={uniqid()}>
               {t}
+              {updatingTopping && t === updatingTopping && (
+                " *UPDATE WITH THE FIELD BELOW* "
+              )}
               <button type="button" onClick={() => removeTopping(t)}>Delete</button>
               {updatingTopping && t === updatingTopping && (
                 <button type="button" onClick={() => cancelUpdate()}>Cancel Update</button>
@@ -145,6 +148,9 @@ const App = () => {
           {pizzasMenu.map((p) => (
             <li key={uniqid()}>
               {p.name}
+              {updatingPizza && p.name === updatingPizza && (
+                " *UPDATE WITH THE FIELDS BELOW* "
+              )}
               <button type="button" onClick={() => removePizza(p.name)}>Delete</button>
               {updatingPizza && p.name === updatingPizza && (
                 <button type="button" onClick={() => cancelPizzaUpdate()}>Cancel Update</button>
