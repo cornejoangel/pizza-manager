@@ -17,6 +17,9 @@ const ToppingMenu = () => {
   }
 
   const updateTopping = (oldTopping, newTopping) => {
+    if (newTopping.length === 0 || newTopping === '') {
+      return false;
+    }
     if (!menu.includes(oldTopping.toLowerCase()) || menu.includes(newTopping.toLowerCase())) {
       return false;
     }

@@ -39,3 +39,8 @@ test('We are not able to update a topping to be an existing topping', () => {
   expect(tm.updateTopping('mush', 'mushroom')).toBe(false);
   expect(tm.getMenu()).toContain('mush');
 });
+
+test('Cannot update to an empty pizza name', () => {
+  expect(tm.addTopping("spinach")).toBe(true);
+  expect(tm.updateTopping("spinach", "")).toBe(false);
+})
