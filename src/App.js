@@ -12,6 +12,7 @@ const App = () => {
   const [pizzasMenu, setPizzasMenu] = useState(pizzas.getMenu());
   const [pizza, setPizza] = useState('');
   const [pizzaToppings, setPizzaToppings] = useState([]);
+  const [updatingPizza, setUpdatingPizza] = useState(false);
 
   const addTopping = (e, newTopping) => {
     e.preventDefault();
@@ -71,6 +72,24 @@ const App = () => {
     setPizzasMenu(pizzas.getMenu());
   }
 
+  const cancelPizzaUpdate = () => {
+    setUpdatingPizza(false);
+  }
+
+  const selectPizza = (oldPizza) => {
+    setUpdatingPizza(oldPizza);
+  }
+
+  const updatePizza = (e, newPizza) => {
+    e.preventDefault();
+    pizzas.updateName(updatingPizza, newPizza);
+    pizzas.updateToppings(newPizza, pizzaToppings);
+    setPizzasMenu(pizzas.getMenu());
+    setPizza('');
+    setUpdatingPizza(false);
+    setPizzaToppings([]);
+  }
+
   return (
     <main>
       <div className="toppings">
@@ -111,6 +130,12 @@ const App = () => {
             <li key={uniqid()}>
               {p.name}
               <button type="button" onClick={() => removePizza(p.name)}>Delete</button>
+              {updatingPizza && p.name === updatingPizza && (
+                <button type="button" onClick={() => cancelPizzaUpdate()}>Cancel Update</button>
+              )}
+              {!updatingPizza && (
+                <button type="button" onClick={() => selectPizza(p.name)}>Update</button>
+              )}
               <ul>
                 {p.toppings.map((t) => (
                   <li key={uniqid()}>{t}</li>
@@ -119,19 +144,36 @@ const App = () => {
             </li>
           ))}
         </ul>
-        <form onSubmit={(e) => addPizza(e, pizza)}>
-          <label htmlFor="pizza">Add New Pizza</label>
-          <input type="text" name="pizza" value={pizza} onChange={changePizza} />
-          <label htmlFor="topping">Choose toppings</label>
-          {toppingsMenu.map((t) => (
-            <label key={uniqid()}>
-              <input type="checkbox" checked={pizzaToppings.includes(t)} 
-              onChange={(e) => checkTopping(e, t)}/>
-              {t}
-            </label>
-          ))}
-          <button type="submit">Add</button>
-        </form>
+        {!updatingPizza && (
+          <form onSubmit={(e) => addPizza(e, pizza)}>
+            <label htmlFor="pizza">Add New Pizza</label>
+            <input type="text" name="pizza" value={pizza} onChange={changePizza} />
+            <label htmlFor="topping">Choose toppings</label>
+            {toppingsMenu.map((t) => (
+              <label key={uniqid()}>
+                <input type="checkbox" checked={pizzaToppings.includes(t)} 
+                onChange={(e) => checkTopping(e, t)}/>
+                {t}
+              </label>
+            ))}
+            <button type="submit">Add</button>
+          </form>
+        )}
+        {updatingPizza && (
+          <form onSubmit={(e) => updatePizza(e, pizza)}>
+            <label htmlFor="pizza">Update Pizza</label>
+            <input type="text" name="pizza" value={pizza} onChange={changePizza} />
+            <label htmlFor="topping">Choose toppings</label>
+            {toppingsMenu.map((t) => (
+              <label key={uniqid()}>
+                <input type="checkbox" checked={pizzaToppings.includes(t)} 
+                onChange={(e) => checkTopping(e, t)}/>
+                {t}
+              </label>
+            ))}
+            <button type="submit">Update</button>
+          </form>
+        )}
       </div>
     </main>
   );
