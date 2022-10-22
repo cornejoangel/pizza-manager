@@ -14,7 +14,10 @@ First you will need to ensure you have `npm` installed to run this app:
 1. Download the project folder.
 2. Open your command line or terminal and navigate to the project folder.
 3. Run `npm install`
-4. After this is done run `npm start`, a browser window will open where the program is running live.
+4. Run `npm run build`
+5. Run `npm start`
+6. View the project at http://localhost:3000/
+7. When you are done you can close the browser tab and stop the program on your terminal ("control" + "c" on mac, "CTRL" + "c" on windows).
 
 ### Test the program locally:
 1. Open your command line or terminal and navigate to the project folder.
